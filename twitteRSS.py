@@ -39,6 +39,7 @@ class twitter_feed():
 	
 	# Converts RSS bits and returns full RSS XML output
 	def convert_RSS(self):
+		get_Posts()
 		bitlist = []
 			
 		#main xml
@@ -67,5 +68,4 @@ class twitter_feed():
 
 #test
 #twiddle = twitter_feed("username", 100)
-#twiddle.get_Posts()
 #twiddle.convert_RSS()
