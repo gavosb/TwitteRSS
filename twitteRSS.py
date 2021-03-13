@@ -1,7 +1,7 @@
-# Twitter RSS Feed script
+# Twitter RSS Feed Generator
 # By Gavin
 #
-# February 24 2021
+# March 13th 2021
 
 import twint
 import PyRSS2Gen
@@ -11,11 +11,11 @@ import os
 
 # Acquires twitter feed json from API
 class twitter_feed():
-	def __init__(self, username, limit):
+	def __init__(self, username, limit, shadowban):
 		self.username = username
 		self.c = twint.Config()
 		self.c.Username = username
-		#config.Profile_full = True #uncomment if user is shadowbanned
+		self.c.Profile_full = shadowban
 		self.limit = limit
 		self.c.Store_json = True 
 		self.c.Output = "temp.json"
@@ -39,7 +39,7 @@ class twitter_feed():
 	
 	# Converts RSS bits and returns full RSS XML output
 	def convert_RSS(self):
-		get_Posts()
+		self.get_Posts()
 		bitlist = []
 			
 		#main xml
@@ -64,8 +64,3 @@ class twitter_feed():
 		#clean up leftover files
 		if os.path.exists("temp.json"):
 			os.remove("temp.json")
-
-
-#test
-#twiddle = twitter_feed("username", 100)
-#twiddle.convert_RSS()
